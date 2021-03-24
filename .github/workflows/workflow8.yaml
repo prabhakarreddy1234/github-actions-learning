@@ -1,0 +1,17 @@
+name: workflow4
+on:
+  workflow_run:
+    workflows: ["workflow2"]
+    # This workflow will run when workflow2 is completed
+    branches: [develop]
+    types:
+      - completed
+jobs:
+  invoke_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: some step ( print datetime )
+      run: |
+        date +"%F_%H-%m-%S"
+        echo 'SOME STEP EXECUTED !'
+# The End !

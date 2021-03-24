@@ -1,0 +1,18 @@
+name: workflow3
+on:
+  workflow_run:
+    workflows: ["workflow1"]
+    # This workflow will run when workflow1 is completed
+    branches: [develop]
+    types:
+    - completed
+jobs:
+  invoke_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: some step ( print datetime )
+      run: |
+        date +"%F_%H-%m-%S"
+        sleep 10 # Just easier for monitoring progress from github action page
+        echo 'SOME STEP EXECUTED !'
+# The End !

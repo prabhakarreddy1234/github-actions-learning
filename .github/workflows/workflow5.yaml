@@ -1,0 +1,19 @@
+name: workflow1
+on:
+  workflow_dispatch:
+  push:
+    branches: [ develop ] # You specify branch here, however all your workflows files must live in the default branch
+    # Branch name ^^^  Only present in the workflow file that should start on push
+jobs:
+  invoke_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: some step ( print datetime )
+      run: |
+        date +"%F_%H-%m-%S"
+        sleep 10
+        echo 'SOME STEP EXECUTED !'
+# How to make secret personal token : 
+# 1. https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+# 2. https://docs.github.com/en/actions/reference/authentication-in-a-workflow#using-the-github_token-in-a-workflow
+
