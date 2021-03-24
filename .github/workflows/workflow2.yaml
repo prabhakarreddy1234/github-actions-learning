@@ -1,0 +1,22 @@
+name: workflow2
+on:
+  workflow_dispatch:
+jobs:
+  invoke_workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: some step ( print datetime )
+      run: |
+        date +"%F_%H-%m-%S"
+        sleep 30 # Just easier for monitoring progress from github action page
+        echo 'SOME STEP EXECUTED !'
+    - name: Invoke workflow 4
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        workflow: workflow4
+        #         ^^^^^^ should match name field in target workflow
+        token: ${{ secrets.PERSONAL_TOKEN }}
+# How to make secret personal token : 
+# 1. https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+# 2. https://docs.github.com/en/actions/reference/authentication-in-a-workflow#using-the-github_token-in-a-workflow
+
